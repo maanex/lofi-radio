@@ -8,6 +8,7 @@
     "fdev": "copyfiles ./src/frontend/**/* ./build/frontend/ -u 2 && npm run start",
     "build": "tsc && copyfiles ./src/frontend/**/* ./build/frontend/ -u 2",
     "start": "electron build/index.js",
+    "package": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andreas May (@maanex)",
