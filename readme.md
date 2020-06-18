@@ -1,6 +1,6 @@
 # Lofi Radio
 
-screenshot here
+![Preview Image](https://raw.githubusercontent.com/Maanex/lofi-radio/master/github/preview.png)
 
 ## Made possible thanks to these awesome tools and apis
 
