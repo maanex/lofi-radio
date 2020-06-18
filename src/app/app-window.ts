@@ -34,7 +34,7 @@ export default class AppWindow extends BrowserWindow {
       fullscreenable: false,
       fullscreen: false,
       maximizable: false,
-      alwaysOnTop: !!store.get('settings').ontop,
+      alwaysOnTop: !!store.get('settings')?.ontop,
       title: 'Lofi Radio'
     });
   }
@@ -48,6 +48,10 @@ export default class AppWindow extends BrowserWindow {
 
     ipcMain.on('exit', () => {
       app.quit();
+    });
+
+    ipcMain.on('init', (e) => {
+      e.sender.send('loadSettings', Core.store.get('settings'));
     });
     
     ipcMain.on('title', (e, title) => {

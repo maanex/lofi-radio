@@ -17,9 +17,10 @@ app = new Vue({
     volumeMomentum: 0,
     volumeChanged: false,
     inMenu: false,
+    lastPlayed: [],
     settings: {
-      ontop: true,
-      shuffle: false,
+      ontop: false,
+      shuffle: true,
       darktheme: true,
       color: 0
     },
@@ -100,7 +101,22 @@ app = new Vue({
       ipcRenderer.send('extlink', url);
     },
     async nextTrack(direction = 1) {
-      this.index += direction;
+      if (direction > 0) this.lastPlayed.push(this.index);
+
+      if (this.settings.shuffle) {
+        this.loadTracklist();
+        if (direction > 0) {
+          const nono = this.lastPlayed.slice(this.lastPlayed.length - Math.min(this.lastPlayed.length / 2, this.tracklist.length / 2));
+          let selection;
+          do selection = Math.floor(Math.random() * this.tracklist.length);
+          while (nono.includes(selection));
+          this.index = selection;
+        } else {
+          this.index = this.lastPlayed.splice(this.lastPlayed.length - 1, 1)[0];
+        }
+      } else {
+        this.index += direction;
+      }
 
       if (this.index >= this.tracklist.length)
         await this.loadTracklist();
@@ -139,7 +155,18 @@ setInterval(async () => {
   }
 }, 200);
 
+
+ipcRenderer.on('loadSettings', (e, settings) => {
+  if (!settings) return;
+  for (const key in settings) {
+    Vue.set(app.settings, key, settings[key]);
+  }
+});
+
 (async () => {
+  ipcRenderer.send('init');
+  await app.loadTracklist();
+  await app.loadTracklist();
   await app.nextTrack();
   app.player.pause();
 })();
