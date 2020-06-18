@@ -18,8 +18,8 @@ class AppCore {
 
     //
 
-    this.window.loadContent();
     this.window.registerHandlers();
+    this.window.loadContent();
   }
 
 }
