@@ -9,12 +9,20 @@
     "fdev": "copyfiles ./frontend/**/* ./build/frontend/ -u 1 && npm run start",
     "build": "tsc && copyfiles ./frontend/**/* ./build/frontend/ -u 1",
     "start": "electron build/index.js",
-    "package": "copyfiles ./package*.json ./package/ && copyfiles ./node_modules/**/* ./package/ && copyfiles ./resources/**/* ./package/ && copyfiles ./frontend/**/* ./package/ && copyfiles ./build/**/* ./package/ && electron-packager ./package --platform=win32 --arch=x64 --overwrite --out=dist",
+    "bundle": "copyfiles ./package*.json ./package/ && copyfiles ./node_modules/**/* ./package/ && copyfiles ./resources/**/* ./package/ && copyfiles ./frontend/**/* ./package/ && copyfiles ./build/**/* ./package/",
+    "pack:local": "electron-packager ./package --overwrite --out=dist",
+    "pack:win32": "electron-packager ./package --platform=win32 --arch=x64 --overwrite --out=dist --icon=\"./resources/icons/win/icon.ico\"",
+    "pack:linux": "electron-packager ./package --platform=linux --arch=x64 --overwrite --out=dist --icon=\"./resources/icons/icon128.png\"",
+    "pack:osx": "electron-packager ./package --platform=darwin --arch=x64 --overwrite --out=dist --icon=\"./resources/icons/icon128.png\"",
+    "pack:all": "npm run pack:win32 && npm run pack:linux && npm run pack:osx",
+    "package": "npm run build && npm run bundle && npm run pack:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andreas May (@maanex)",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "dotenv": "^8.2.0",
     "electron-store": "^5.2.0",
     "ts-node": "^8.8.1"
   },

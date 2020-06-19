@@ -1,3 +1,6 @@
+import { config as loadDotenv } from 'dotenv';
+loadDotenv();
+
 import { app, BrowserWindow } from 'electron';
 import Configs from "./configs";
 import AppWindow from "./app/app-window";

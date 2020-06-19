@@ -35,7 +35,10 @@ export default class AppWindow extends BrowserWindow {
       fullscreen: false,
       maximizable: false,
       alwaysOnTop: !!store.get('settings')?.ontop,
-      title: 'Lofi Radio'
+      title: 'Lofi Radio',
+      icon: process.env.NODE_ENV == 'development'
+        ? './resources/icons/icon128.png'
+        : '../../resources/icons/icon128.png'
     });
   }
 
