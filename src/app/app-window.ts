@@ -35,10 +35,7 @@ export default class AppWindow extends BrowserWindow {
       fullscreen: false,
       maximizable: false,
       alwaysOnTop: !!store.get('settings')?.ontop,
-      title: 'Lofi Radio',
-      icon: process.env.NODE_ENV == 'development'
-        ? './resources/icons/icon128.png'
-        : '../../resources/icons/icon128.png'
+      title: 'Lofi Radio'
     });
   }
 
@@ -63,9 +60,11 @@ export default class AppWindow extends BrowserWindow {
 
     let moveInterval: NodeJS.Timeout;
     ipcMain.on('startWindowMove', (e, mouseX, mouseY) => {
+      if (moveInterval)
+        clearInterval(moveInterval);
       moveInterval = setInterval(() => {
-        const { x, y } = screen.getCursorScreenPoint();
-        this.setPosition(x - mouseX, y - mouseY);
+        const { x, y } = screen?.getCursorScreenPoint();
+        this?.setPosition(x - mouseX, y - mouseY);
       }, 10);
     });
     

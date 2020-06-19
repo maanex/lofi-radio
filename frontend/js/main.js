@@ -48,7 +48,9 @@ app = new Vue({
   },
   watch: {
     currentSong() {
+      this.player.pause();
       this.player = new Audio(this.audioUrl);
+      this.player.volume = this.volume;
       this.player.onpaused = () => this.pause = true;
       this.player.onplaying = () => this.pause = false;
       ipcRenderer.send('title', this.title);
