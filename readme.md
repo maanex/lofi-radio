@@ -2,6 +2,10 @@
 
 ![Preview Image](https://raw.githubusercontent.com/Maanex/lofi-radio/master/github/preview.png)
 
+## Download and go
+
+https://maanex.itch.io/lofi-radio
+
 ## Made possible thanks to these awesome tools and apis
 
 * Music from https://chillhop.com/
