@@ -29,4 +29,4 @@ Run `npm run fdev` to quickstart quicker when only done frontend changes.
 
 ## Contributors
 
-* Maanex ([Twitter](https://twitter.com/Maanex_)) ([Github](https://github.com/Maanex)) ([Website](https://maanex.tk/))
+* Maanex ([Twitter](https://twitter.com/Maanex_)) ([Github](https://github.com/Maanex)) ([Website](https://maanex.me/))
